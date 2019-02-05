@@ -3,8 +3,6 @@ export default abstract class Account {
 
     protected _memberId: number;
     protected _balance: number;
-    
-    
 
     public get memberId() : number {
         return this._memberId;
