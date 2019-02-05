@@ -1,14 +1,26 @@
 //CheckingAccount.ts
-import Account from './Account.abstract';
+export default class CheckingAccount{
 
-export default class CheckingAccount extends Account{
-
+    private _memberId: number;
+    private _balance: number;
     private _maxWithdrawalAmount: number;
 
-    constructor(memberId: number, startingBalance: number){
-        super(memberId, startingBalance);
+    public get memberId() : number {
+        return this._memberId;
+    }
+    
+    public get balance() : number {
+        return this._balance;
+    }
 
+    constructor(memberId: number, startingBalance: number){
+        this._memberId = memberId;
+        this._balance = startingBalance;
         this._maxWithdrawalAmount = 250;
+    }
+
+    public deposit(amount: number): void{
+        this._balance += amount;
     }
 
     public withdraw(amount: number): void{
