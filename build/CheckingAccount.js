@@ -27,47 +27,39 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var SavingsAccount =
+var CheckingAccount =
 /*#__PURE__*/
 function (_Account) {
-  _inherits(SavingsAccount, _Account);
+  _inherits(CheckingAccount, _Account);
 
-  function SavingsAccount(memberId, startingBalance) {
+  function CheckingAccount(memberId, startingBalance) {
     var _this;
 
-    _classCallCheck(this, SavingsAccount);
+    _classCallCheck(this, CheckingAccount);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SavingsAccount).call(this, memberId, startingBalance));
-    _this._percentInterestGrowth = 3;
-    _this._maxMonthlyWithdrawals = 3;
-    _this._currentMonthlyWithdrawls = 0;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CheckingAccount).call(this, memberId, startingBalance));
+    _this._maxWithdrawalAmount = 250;
     return _this;
   }
 
-  _createClass(SavingsAccount, [{
-    key: "addMonthlyInterestGrowth",
-    value: function addMonthlyInterestGrowth() {
-      this._balance += this._balance * (this._percentInterestGrowth / 100);
-    }
-  }, {
+  _createClass(CheckingAccount, [{
     key: "withdraw",
     value: function withdraw(amount) {
-      if (this._currentMonthlyWithdrawls === this._maxMonthlyWithdrawals) {
-        console.log("Max monthly withdrawal limit has been reached, Please wait until next month.");
+      if (amount > this._maxWithdrawalAmount) {
+        console.log("You can not withdraw more than ".concat(this._maxWithdrawalAmount, " at a time!"));
         return;
       }
 
       if (amount > this._balance) {
-        console.log("Insufficient funds!");
+        console.log("Insufficient Funds!");
         return;
       }
 
       this._balance -= amount;
-      this._currentMonthlyWithdrawls++;
     }
   }]);
 
-  return SavingsAccount;
+  return CheckingAccount;
 }(_Account2.default);
 
-exports.default = SavingsAccount;
+exports.default = CheckingAccount;

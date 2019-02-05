@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _SavingsAccount = _interopRequireDefault(require("./SavingsAccount"));
 
+var _CheckingAccount = _interopRequireDefault(require("./CheckingAccount"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48,6 +50,16 @@ function () {
       this._savingsAccount = new _SavingsAccount.default(this._memberId, startingBalance);
     }
   }, {
+    key: "createCheckingAccount",
+    value: function createCheckingAccount(startingBalance) {
+      if (this._checkingAccount !== undefined) {
+        console.log("".concat(this._name, " already owns a checking account."));
+        return;
+      }
+
+      this._checkingAccount = new _CheckingAccount.default(this._memberId, startingBalance);
+    }
+  }, {
     key: "depositToSavings",
     value: function depositToSavings(amount) {
       this._savingsAccount.deposit(amount);
@@ -61,6 +73,21 @@ function () {
     key: "getSavingsBalance",
     value: function getSavingsBalance() {
       return this._savingsAccount.balance;
+    }
+  }, {
+    key: "depositToChecking",
+    value: function depositToChecking(amount) {
+      this._checkingAccount.deposit(amount);
+    }
+  }, {
+    key: "withdrawFromChecking",
+    value: function withdrawFromChecking(amount) {
+      this._checkingAccount.withdraw(amount);
+    }
+  }, {
+    key: "getCheckingBalance",
+    value: function getCheckingBalance() {
+      return this._checkingAccount.balance;
     }
   }, {
     key: "generateId",

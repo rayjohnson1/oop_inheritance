@@ -1,32 +1,38 @@
-export default class SavingsAccount {
+//SavingsAccount.ts
+import Account from './Account.abstract'
 
-    private _memberId : number;
-    private _balance : number;
+export default class SavingsAccount extends Account {
 
-    public get memberId() : number {
-        return this._memberId;
-    }
-    
-    public get balance() : number {
-        return this._balance;
-    }
+    private _percentInterestGrowth: number;
+    private _maxMonthlyWithdrawals: number;
+    private _currentMonthlyWithdrawls: number;
 
     constructor(memberId: number, startingBalance: number){
-        this._memberId = memberId;
-        this._balance = startingBalance;
+        super(memberId, startingBalance);
+        this._percentInterestGrowth = 3;
+        this._maxMonthlyWithdrawals = 3;
+        this._currentMonthlyWithdrawls = 0;
     }
 
-    public deposit(amount: number): void{
-        this._balance += amount;
+    public addMonthlyInterestGrowth(): void{
+        this._balance += (this._balance * (this._percentInterestGrowth / 100));
     }
-    
+
     public withdraw(amount: number): void{
+
+        if(this._currentMonthlyWithdrawls === this._maxMonthlyWithdrawals){
+            console.log(`Max monthly withdrawal limit has been reached, Please wait until next month.`);
+            return;
+        }
+
         if(amount > this._balance){
-            console.log("Insufficient Funds!");
+            console.log(`Insufficient funds!`);
             return;
         }
 
         this._balance -= amount;
+        this._currentMonthlyWithdrawls++;
+
     }
 
 }
