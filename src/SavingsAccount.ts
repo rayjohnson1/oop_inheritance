@@ -1,19 +1,33 @@
 //SavingsAccount.ts
-import Account from './Account.abstract'
+export default class SavingsAccount{
 
-export default class SavingsAccount extends Account {
+    protected _memberId: number;
+    protected _balance: number;
 
     private _percentInterestGrowth: number;
     private _maxMonthlyWithdrawals: number;
     private _currentMonthlyWithdrawls: number;
 
+    public get memberId() : number {
+        return this._memberId;
+    }
+    
+    public get balance() : number {
+        return this._balance;
+    }
+
     constructor(memberId: number, startingBalance: number){
-        super(memberId, startingBalance);
-        this._percentInterestGrowth = 3;
+        this._memberId = memberId;
+        this._balance = startingBalance;
+        this._percentInterestGrowth = 2;
         this._maxMonthlyWithdrawals = 3;
         this._currentMonthlyWithdrawls = 0;
     }
 
+    public deposit(amount: number): void{
+        this._balance += amount;
+    }
+    
     public addMonthlyInterestGrowth(): void{
         this._balance += (this._balance * (this._percentInterestGrowth / 100));
     }
